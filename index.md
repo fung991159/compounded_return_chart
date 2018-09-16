@@ -1,4 +1,5 @@
-    <head>
+<html lang="en">
+<head>
         <meta charset="utf-8">
         <title>Power of compounded interest, the world 8th wonder!</title>
         <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
@@ -7,41 +8,42 @@
     </head>
     <body>
 	<div class = "dataInput">
-		<label>assume return rate (%)</label> <input id="returnRate" type="text	" name="returnRate" onkeyup="UpdateValue()" value ="12"><br>
+		<label>assume return rate (%)</label> <input id="returnRate" type="text	" name="returnRate" onkeyup="UpdateValue()" value ="10"><br>
 		<label>Year of investment</label> <input id="yearOfInvestment" type="text" name="yearOfInvestment" onkeyup="UpdateValue()" value = "30"><br>
 		<label>Initial sum</label> <input id="initialSum"type="text" name="initialSum" onkeyup="UpdateValue()" value ="1000"><br>
 	</div>
 
 	<script type="text/javascript">
-		var inputReturnRate = 12
+		var inputReturnRate = 10
 		var yearOfInvestment = 30
 		var initialSum = 1000
-		var endingInvestment = 0
 
 		var dataset
+
 		function calculator() {   
-			dataset = []
-			for (var i=0; i<=yearOfInvestment; i++){
-				endingInvestment = initialSum*(1+inputReturnRate/100)^(i+1) 
+			var endingInvestment = initialSum*(1+inputReturnRate/100) 
+			dataset = [];
+			dataset.push({year: 0, endingInvestment: initialSum})
+			for (var i=1; i<=yearOfInvestment; i++){
+				endingInvestment = endingInvestment*(1+inputReturnRate/100)^(i)
 				dataset.push({
 					year: i,
-					endingInvestment: endingInvestment
+					endingInvestment: +endingInvestment
 				})
-				endingInvestment = initialSum*(1+inputReturnRate/100)^(i+1) 
-				initialSum = endingInvestment
 			};
 		}
-
 		calculator();  //run for initial chart
 		//Width and height
 		var w = 800;
 		var h = 300;
 		var padding = 40;
+		
+		xScale = d3.scaleLinear().domain([0,yearOfInvestment]).range([padding, w-10]).nice() ;
+		yScale = d3.scaleLinear().domain(d3.extent(dataset, (d)=> {return +d.endingInvestment})).range([h - padding, 0]);
 	
 		//Create scale functions
 		// xScale = d3.scaleTime().domain([0,yearOfInvestment]).range([padding, w]);
-		xScale = d3.scaleLinear().domain([0,yearOfInvestment]).range([padding, w]).nice() ;
-		yScale = d3.scaleLinear().domain([0,endingInvestment]).range([h - padding, 0]).nice() ;
+
 						
 		//Define axes
 		xAxis = d3.axisBottom()
@@ -87,10 +89,11 @@
 			clearTimeout(timeout);
 			// set delay to wait for user complete input
 			timeout = setTimeout(function () {
+			console.log({inputReturnRate, yearOfInvestment, initialSum})
+			console.log(dataset)
 				inputReturnRate = document.getElementById("returnRate").value
 				yearOfInvestment = document.getElementById("yearOfInvestment").value
 				initialSum = document.getElementById("initialSum").value
-				console.log({inputReturnRate, yearOfInvestment, initialSum})
 				updateD3Chart();
     		}, 500);
 
@@ -98,28 +101,28 @@
 		 
 		//update chart according to new value
 		function updateD3Chart() {
-			console.log("hey I am here")
-			calculator() //recalculate new dataset
-			console.log(dataset)
-			console.log(yearOfInvestment)
 
+			calculator(); //recalculate new dataset
+
+			console.log({inputReturnRate, yearOfInvestment, initialSum})
+			console.log(dataset)
 			
 		
-		//Update with new data
-		var svg = d3.select("body").transition();
-		xScale.domain([0,yearOfInvestment]);
-		yScale.domain([0,endingInvestment]);
+			//Update with new data
+			var svg = d3.select("body").transition();
+			xScale.domain([0,yearOfInvestment]);
+			yScale.domain(d3.extent(dataset, (d)=> {return +d.endingInvestment}));
 
-		svg.select(".line")
-			.duration(750)
-			.attr('d', line(dataset));
-		svg.select(".xAxis")
-			.duration(750)
-			.call(xAxis);
-		svg.select(".yAxis")
-			.duration(750)
-			.call(yAxis);
-		}
+			svg.select(".line")
+				.duration(750)
+				.attr('d', line(dataset));
+			svg.select(".xAxis")
+				.duration(750)
+				.call(xAxis);
+			svg.select(".yAxis")
+				.duration(750)
+				.call(yAxis);
+			}
 
 		// updateD3Chart()  // just for testing purpose
 		</script>
