@@ -1,3 +1,10 @@
+<style>
+.chart {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+</style>
 <html lang="en">
 <head>
         <meta charset="utf-8">
@@ -63,7 +70,9 @@
 		var svg = d3.select("body")
 					.append("svg")
 					.attr("width", w)
-					.attr("height", h);
+					.attr("height", h)
+					.attr("class", "chart");
+					
 		//Draw line
 		var Path = svg.append("path")
 						.datum(dataset)
