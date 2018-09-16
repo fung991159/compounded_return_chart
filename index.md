@@ -42,8 +42,8 @@
 		}
 		calculator();  //run for initial chart
 		//Width and height
-		var w = 800;
-		var h = 300;
+		var w = 1280;
+		var h = 720;
 		var padding = 40;
 		
 		xScale = d3.scaleLinear().domain([0,yearOfInvestment]).range([padding, w-10]).nice() ;
