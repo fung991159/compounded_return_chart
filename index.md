@@ -10,7 +10,8 @@
 	<div class = "dataInput">
 		<label>assume return rate (%)</label> <input id="returnRate" type="text	" name="returnRate" onkeyup="UpdateValue()" value ="10"><br>
 		<label>Year of investment</label> <input id="yearOfInvestment" type="text" name="yearOfInvestment" onkeyup="UpdateValue()" value = "30"><br>
-		<label>Initial sum</label> <input id="initialSum"type="text" name="initialSum" onkeyup="UpdateValue()" value ="1000"><br>
+		<label>Initial sum</label> 
+		<input id="initialSum" type="text" name="initialSum" onkeyup="UpdateValue()" value ="1000"><br>
 	</div>
 
 	<script type="text/javascript">
