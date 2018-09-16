@@ -5,8 +5,8 @@
         <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
         <style type="text/css">
 		</style>
-    </head>
-    <body>
+</head>
+ <body>
 	<div class = "dataInput">
 		<label>assume return rate (%)</label> <input id="returnRate" type="text	" name="returnRate" onkeyup="UpdateValue()" value ="10"><br>
 		<label>Year of investment</label> <input id="yearOfInvestment" type="text" name="yearOfInvestment" onkeyup="UpdateValue()" value = "30"><br>
