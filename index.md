@@ -6,7 +6,7 @@
 }
 </style>
 <html>
-    <head>
+	<head>
         <meta charset="utf-8">
         <title>Power of compounded interest, the world 8th wonder!</title>
         <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
@@ -17,14 +17,13 @@
 	<div class = "dataInput">
 		<label>assume return rate (%)</label> <input id="returnRate" type="text	" name="returnRate" onkeyup="UpdateValue()" value ="10"><br>
 		<label>Year of investment</label> <input id="yearOfInvestment" type="text" name="yearOfInvestment" onkeyup="UpdateValue()" value = "30"><br>
-		<label>Initial sum</label> <input id="initialSum"type="text" name="initialSum" onkeyup="UpdateValue()" value ="1000"><br>
+		<label>Initial sum</label> <input id="initialSum" type="text" name="initialSum" onkeyup="UpdateValue()" value ="1000"><br>
 	</div>
 
 	<script type="text/javascript">
 		var inputReturnRate = 10
 		var yearOfInvestment = 30
 		var initialSum = 1000
-
 		var dataset
 
 		function calculator() {   
@@ -139,6 +138,5 @@
 		</script>
 	</body>
 </html>
-
 
 
