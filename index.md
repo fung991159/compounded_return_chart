@@ -19,34 +19,45 @@
 		<label>Year of investment</label> <input id="yearOfInvestment" type="text" name="yearOfInvestment" onkeyup="UpdateValue()" value = "30"><br>
 		<label>Initial sum</label> <input id="initialSum" type="text" name="initialSum" onkeyup="UpdateValue()" value ="1000"><br>
 	</div>
+	<br>
+	<br>
 
 	<script type="text/javascript">
 		var inputReturnRate = 10
 		var yearOfInvestment = 30
 		var initialSum = 1000
 		var dataset
-
+		var formatValue = d3.format(".2s");  //format millions to M
+		
 		function calculator() {   
 			var endingInvestment = initialSum;
+			var twoX;
+			var fourX;
+			var tenX;
+			
 			// var endingInvestment = initialSum*(1+inputReturnRate/100) 
 			dataset = [];
-			dataset.push({year: 0, endingInvestment: endingInvestment})
+			dataset.push({year: 0, endingInvestment: +endingInvestment})
 			for (var i=1; i<=yearOfInvestment; i++){
 				endingInvestment = endingInvestment*(1+inputReturnRate/100)^(i)
 				dataset.push({
 					year: i,
 					endingInvestment: +endingInvestment
 				})
+				// investment 2x, 4x, 10x checker
+				if (endingInvestment/initialSum > 2) {
+					console.log("2x!!!! at year " + i)
+				} 
 			};
 		}
 		calculator();  //run for initial chart
 		//Width and height
-		var w = 800;
+		var w = 780;
 		var h = 300;
 		var padding = 40;
 		
 		xScale = d3.scaleLinear().domain([0,yearOfInvestment]).range([padding, w-10]).nice() ;
-		yScale = d3.scaleLinear().domain(d3.extent(dataset, (d)=> {return +d.endingInvestment})).range([h - padding, 0]);
+		yScale = d3.scaleLinear().domain(d3.extent(dataset, (d)=> {return +d.endingInvestment})).range([h - padding, 0]).nice();
 	
 		//Create scale functions
 		// xScale = d3.scaleTime().domain([0,yearOfInvestment]).range([padding, w]);
@@ -54,11 +65,12 @@
 						
 		//Define axes
 		xAxis = d3.axisBottom()
-				  .scale(xScale)
+				  .scale(xScale);
 
 		//Define Y axis
 		yAxis = d3.axisLeft()
 					.scale(yScale)
+					.tickFormat(formatValue);
 		
 		//Line generator
 		var line = d3.line()
@@ -68,7 +80,7 @@
 		// Create SVG element
 		var svg = d3.select("body")
 					.append("svg")
-					.attr("viewBox", "0 0 800 300")
+					.attr("viewBox", "0 0 780 300")
 					.attr("preserveAspectRatio", "xMidYMid meet")
 					.attr("width", w)
 					.attr("height", h);
@@ -83,15 +95,22 @@
 
 		//Draw axes
 		svg.append("g")
-						.attr("class", "xAxis")
-						.attr("transform", "translate(0," + (h - padding) + ")")
-						.call(xAxis);
+			.attr("class", "xAxis")
+			.attr("transform", "translate(0," + (h - padding) + ")")
+			.call(xAxis)
+
 			
 		svg.append("g")
-						.attr("class", "yAxis")
-						.attr("transform", "translate(" + padding + ",0)")
-						.call(yAxis);
+			.attr("class", "yAxis")
+			.attr("transform", "translate(" + padding + ",0)")
+			.call(yAxis);
 		
+		  // text label for the x axis
+		svg.append("text")             
+			.attr("transform", "translate(" + (w/2) + " ," + 
+			(h) + ")")
+			.style("text-anchor", "middle")
+			.text("Investment year");
 		//update javascript variable on html input
 
 		var timeout = null;
@@ -121,8 +140,8 @@
 			//Update with new data
 			var svg = d3.select("body").transition();
 			xScale.domain([0,yearOfInvestment]);
-			yScale.domain(d3.extent(dataset, (d)=> {return +d.endingInvestment}));
-
+			yScale.domain(d3.extent(dataset, (d)=> {return +d.endingInvestment})).nice();
+			
 			svg.select(".line")
 				.duration(750)
 				.attr('d', line(dataset));
@@ -138,5 +157,4 @@
 		</script>
 	</body>
 </html>
-
 
