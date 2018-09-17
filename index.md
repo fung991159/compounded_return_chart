@@ -5,7 +5,7 @@
     margin-right: auto;
 }
 </style>
-<head>
+    <head>
         <meta charset="utf-8">
         <title>Power of compounded interest, the world 8th wonder!</title>
         <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
@@ -68,10 +68,11 @@
 		// Create SVG element
 		var svg = d3.select("body")
 					.append("svg")
+					.attr("viewBox", "0 0 800 300")
+					.attr("preserveAspectRatio", "xMidYMid meet")
 					.attr("width", w)
-					.attr("height", h)
-					.attr("viewBox=", "0 0 960 500")
-					.attr("preserveAspectRatio", "xMidYMid meet");
+					.attr("height", h);
+
 		//Draw line
 		var Path = svg.append("path")
 						.datum(dataset)
@@ -137,5 +138,6 @@
 		</script>
 	</body>
 </html>
+
 
 
