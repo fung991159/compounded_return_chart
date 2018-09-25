@@ -1,6 +1,6 @@
 
 	
-	<head>
+<head>
         <meta charset="utf-8">
         <title>Power of compounded interest, the world 8th wonder!</title>
         <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
@@ -330,5 +330,5 @@
 			
 		</script>
 	</body>
-</html>
+
 
