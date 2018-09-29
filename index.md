@@ -1,4 +1,4 @@
-<html>
+
 <head>
         <meta charset="utf-8">
         <title>Power of compounded interest, the world 8th wonder!</title>
