@@ -1,12 +1,11 @@
 
 <head>
-        <meta charset="utf-8">
-        <title>Power of compounded interest, the world 8th wonder!</title>
-        <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
-        <style type="text/css">
-		</style>
-    </head>
-    <body>
+<meta charset="utf-8">
+<title>Power of compounded interest, the world 8th wonder!</title>
+<script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+
+</head>
+<body>
 
 <div class = "dataInput">
 		<label>assume return rate (%)</label> <input id="returnRate" type="text" name="returnRate" onkeyup="UpdateValue()" value ="10"><br>
