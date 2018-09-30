@@ -12,12 +12,9 @@
 		<label>assume return rate (%)</label> <input id="returnRate" type="text" name="returnRate" onkeyup="UpdateValue()" value ="10"><br>
 		<label>Year of investment</label> <input id="yearOfInvestment" type="text" name="yearOfInvestment" onkeyup="UpdateValue()" value = "30"><br>
 		<label>Initial sum</label> <input id="initialSum" type="text" name="initialSum" onkeyup="UpdateValue()" value ="1000"><br>
-	</div>
-	<div id = "chartContainer"></div>
-	
-	<!-- <img src="http://www.theinvestmentmania.com/wp-content/uploads/2016/06/8thWonder-Compounding-Interest.jpg" 
-	alt="power of compounded interest, the world eighth wonder"
-	width=50%> -->
+</div>
+<div id = "chartContainer"></div>
+
 <style>
 .line {
         stroke-width: 2;
